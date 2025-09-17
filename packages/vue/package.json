@@ -47,6 +47,11 @@
     "composable",
     "typescript"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicsoftware/suggesto-widget.git",
+    "directory": "packages/vue"
+  },
   "author": "Niccolò Banti",
   "license": "MIT",
   "publishConfig": {
