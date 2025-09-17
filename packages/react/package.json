@@ -1,0 +1,57 @@
+{
+  "name": "@suggesto/react",
+  "version": "1.0.0",
+  "description": "React hooks and components for Suggesto feedback widget",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17 || ^18 || ^19"
+  },
+  "dependencies": {
+    "@suggesto/core": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.3",
+    "vitest": "^1.6.0",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/jest-dom": "^6.4.6",
+    "jsdom": "^24.1.0"
+  },
+  "keywords": [
+    "suggesto",
+    "feedback",
+    "widget",
+    "react",
+    "hook",
+    "typescript"
+  ],
+  "author": "Niccolò Banti",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

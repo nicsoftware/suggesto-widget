@@ -1,0 +1,23 @@
+{
+  "name": "quick-test-example",
+  "version": "1.0.1",
+  "private": true,
+  "description": "Quick test example for published Suggesto packages",
+  "main": "index.js",
+  "scripts": {
+    "test-core": "node test-core.js",
+    "test-react": "echo 'Create a React project and test @suggesto/react'",
+    "test-vue": "echo 'Create a Vue project and test @suggesto/vue'",
+    "test-nuxt": "echo 'Create a Nuxt project and test @suggesto/nuxt'"
+  },
+  "dependencies": {
+    "@suggesto/core": "^2.0.0"
+  },
+  "keywords": [
+    "suggesto",
+    "test",
+    "example"
+  ],
+  "author": "Niccolò Banti",
+  "license": "MIT"
+}
