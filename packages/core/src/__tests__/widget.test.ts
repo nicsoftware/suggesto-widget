@@ -110,7 +110,7 @@ describe('SuggestoWidget', () => {
       if (tagName === 'script') {
         const script = originalCreateElement.call(document, tagName);
         setTimeout(() => {
-          if (script.onerror) script.onerror(new Error('Network error'));
+          if (script.onerror) script.onerror(new Event('error') as any);
         }, 0);
         return script;
       }
