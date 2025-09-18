@@ -8,12 +8,12 @@ Official NPM packages for integrating the Suggesto feedback widget into modern w
 
 ## 📦 Packages
 
-| Package | Version | Description |
-|---------|---------|-------------|
-| [`@suggesto/core`](./packages/core) | ![npm](https://img.shields.io/npm/v/@suggesto/core) | Core library for JavaScript widget integration |
-| [`@suggesto/react`](./packages/react) | ![npm](https://img.shields.io/npm/v/@suggesto/react) | React hooks and components |
-| [`@suggesto/vue`](./packages/vue) | ![npm](https://img.shields.io/npm/v/@suggesto/vue) | Vue 3 composables and components |
-| [`@suggesto/nuxt`](./packages/nuxt) | ![npm](https://img.shields.io/npm/v/@suggesto/nuxt) | Nuxt 3 module for zero-config setup |
+| Package                               | Version                                              | Description                                    |
+| ------------------------------------- | ---------------------------------------------------- | ---------------------------------------------- |
+| [`@suggesto/core`](./packages/core)   | ![npm](https://img.shields.io/npm/v/@suggesto/core)  | Core library for JavaScript widget integration |
+| [`@suggesto/react`](./packages/react) | ![npm](https://img.shields.io/npm/v/@suggesto/react) | React hooks and components                     |
+| [`@suggesto/vue`](./packages/vue)     | ![npm](https://img.shields.io/npm/v/@suggesto/vue)   | Vue 3 composables and components               |
+| [`@suggesto/nuxt`](./packages/nuxt)   | ![npm](https://img.shields.io/npm/v/@suggesto/nuxt)  | Nuxt 3 module for zero-config setup            |
 
 ## 🚀 Quick Start
 
@@ -78,8 +78,8 @@ npm install @suggesto/nuxt
 export default defineNuxtConfig({
   modules: ['@suggesto/nuxt'],
   suggesto: {
-    boardId: 'your-board-id'
-  }
+    boardId: 'your-board-id',
+  },
 });
 ```
 
@@ -117,22 +117,26 @@ Working examples for all supported frameworks:
 ## ⚡ Features
 
 ### Core Features
+
 - **Dynamic Widget Loading** - Widget script loads only when needed
 - **Event System** - Listen to widget ready, feedback submitted, error events
 - **Error Handling** - Graceful fallbacks and comprehensive error reporting
 - **TypeScript Support** - Full type definitions for all APIs
 
 ### React Features
+
 - **useSuggesto Hook** - Programmatic control with React state management
 - **SuggestoWidget Component** - Declarative component with prop-based configuration
 - **Automatic Cleanup** - Proper widget lifecycle management
 
 ### Vue Features
+
 - **useSuggesto Composable** - Vue 3 composition API integration
 - **Reactive State** - Loading and error states as reactive refs
 - **Component & Composable** - Both declarative and programmatic approaches
 
 ### Nuxt Features
+
 - **Zero Configuration** - Auto-import and setup
 - **Server-Side Safe** - Client-side only loading with SSR compatibility
 - **Runtime Configuration** - Environment-based configuration
@@ -160,7 +164,7 @@ npm run dev
 ```
 ├── packages/
 │   ├── core/           # @suggesto/core
-│   ├── react/          # @suggesto/react  
+│   ├── react/          # @suggesto/react
 │   ├── vue/            # @suggesto/vue
 │   └── nuxt/           # @suggesto/nuxt
 ├── examples/
@@ -201,7 +205,7 @@ Packages are published using [Changesets](https://github.com/changesets/changese
 # 1. Create a changeset
 npm run changeset
 
-# 2. Version packages  
+# 2. Version packages
 npm run version-packages
 
 # 3. Publish to NPM
@@ -223,7 +227,5 @@ MIT © [Suggesto Team](https://suggesto.io)
 
 ## 🆘 Support
 
-- 📖 [Documentation](https://docs.suggesto.io)
-- 💬 [Discord Community](https://discord.gg/suggesto)
+- 📖 [Documentation](https://suggesto.io/docs)
 - 🐛 [Issue Tracker](https://github.com/nicsoftware/suggesto-widget/issues)
-- ✉️ [Email Support](mailto:support@suggesto.io)
