@@ -225,5 +225,5 @@ MIT © [Suggesto Team](https://suggesto.io)
 
 - 📖 [Documentation](https://docs.suggesto.io)
 - 💬 [Discord Community](https://discord.gg/suggesto)
-- 🐛 [Issue Tracker](https://github.com/suggesto/packages/issues)
+- 🐛 [Issue Tracker](https://github.com/nicsoftware/suggesto-widget/issues)
 - ✉️ [Email Support](mailto:support@suggesto.io)

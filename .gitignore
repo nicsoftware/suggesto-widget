@@ -110,11 +110,7 @@ temp/
 !.changeset/README.md
 
 # Docs
-/DEPLOYMENT.md
-/INSTRUCTIONS.md
-/PRD.md
-/PROJECT_SUMMARY.md
-/PROMPT.md
+/docs/*
 
 # Personal/Private files
 CLAUDE.md

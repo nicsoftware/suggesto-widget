@@ -1,6 +1,6 @@
 # @suggesto/vue
 
-## 2.0.0
+## 1.0.0
 
 ### Major Changes
 
@@ -9,4 +9,4 @@
 ### Patch Changes
 
 - Updated dependencies
-  - @suggesto/core@2.0.0
+  - @suggesto/core@1.0.0
