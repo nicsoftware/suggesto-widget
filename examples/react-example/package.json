@@ -10,10 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@suggesto/core": "1.0.0",
+    "@suggesto/react": "1.0.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "@suggesto/react": "2.0.0",
-    "@suggesto/core": "2.0.0"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.5",
@@ -25,6 +25,6 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.9",
     "typescript": "^5.5.3",
-    "vite": "^5.4.0"
+    "vite": "^7.1.6"
   }
 }

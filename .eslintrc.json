@@ -7,7 +7,7 @@
   },
   "extends": [
     "eslint:recommended",
-    "@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -41,8 +41,12 @@
   "overrides": [
     {
       "files": ["**/*.test.ts", "**/*.test.tsx"],
-      "env": {
-        "vitest/globals": true
+      "globals": {
+        "describe": "readonly",
+        "it": "readonly",
+        "expect": "readonly",
+        "beforeEach": "readonly",
+        "vi": "readonly"
       }
     },
     {

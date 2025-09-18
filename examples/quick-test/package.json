@@ -11,7 +11,7 @@
     "test-nuxt": "echo 'Create a Nuxt project and test @suggesto/nuxt'"
   },
   "dependencies": {
-    "@suggesto/core": "^2.0.0"
+    "@suggesto/core": "^1.0.0"
   },
   "keywords": [
     "suggesto",
