@@ -25,7 +25,7 @@ export default defineNuxtModule<ModuleOptions>({
     };
 
     // Add plugin
-    addPlugin(resolve('./runtime/plugin.client.ts'));
+    addPlugin(resolve('./runtime/plugin.client.js'));
 
     // Add types
     nuxt.hook('prepare:types', ({ references }) => {

@@ -164,3 +164,6 @@ test-results/
 coverage/
 .nyc_output/
 *.lcov
+
+# Tests
+/tests/*

@@ -1,6 +1,6 @@
 {
   "name": "@suggesto/nuxt",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Nuxt 3 & 4 module for Suggesto feedback widget integration",
   "main": "./dist/module.mjs",
   "types": "./dist/module.d.ts",
@@ -13,6 +13,7 @@
   },
   "files": [
     "dist",
+    "src",
     "README.md"
   ],
   "scripts": {

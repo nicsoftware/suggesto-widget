@@ -1,5 +1,11 @@
 # @suggesto/nuxt
 
+## 1.0.3
+
+### Patch Changes
+
+- Singleton pattern created
+
 ## 1.0.0
 
 ### Major Changes
