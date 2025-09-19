@@ -1,6 +1,6 @@
 {
   "name": "@suggesto/vue",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Vue 3 composables and components for Suggesto feedback widget",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -27,7 +27,7 @@
     "vue": "^3.0.0"
   },
   "dependencies": {
-    "@suggesto/core": "1.0.0"
+    "@suggesto/core": "1.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",

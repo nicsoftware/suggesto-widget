@@ -1,6 +1,6 @@
 {
   "name": "quick-test-example",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "description": "Quick test example for published Suggesto packages",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "test-nuxt": "echo 'Create a Nuxt project and test @suggesto/nuxt'"
   },
   "dependencies": {
-    "@suggesto/core": "^1.0.0"
+    "@suggesto/core": "^1.0.1"
   },
   "keywords": [
     "suggesto",

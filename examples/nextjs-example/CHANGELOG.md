@@ -1,5 +1,14 @@
 # nextjs-example
 
+## 0.1.3
+
+### Patch Changes
+
+- Documentation update
+- Updated dependencies
+  - @suggesto/core@1.0.1
+  - @suggesto/react@1.0.2
+
 ## 0.1.2
 
 ### Patch Changes

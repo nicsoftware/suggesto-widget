@@ -1,6 +1,6 @@
 {
   "name": "@suggesto/react",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React hooks and components for Suggesto feedback widget",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -27,7 +27,7 @@
     "react": "^16.8.0 || ^17 || ^18 || ^19"
   },
   "dependencies": {
-    "@suggesto/core": "1.0.0"
+    "@suggesto/core": "1.0.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.6",

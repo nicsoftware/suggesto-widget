@@ -1,7 +1,7 @@
 {
   "name": "react-example",
   "private": true,
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@suggesto/core": "1.0.0",
-    "@suggesto/react": "1.0.1",
+    "@suggesto/core": "1.0.1",
+    "@suggesto/react": "1.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

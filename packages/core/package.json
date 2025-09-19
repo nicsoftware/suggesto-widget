@@ -1,6 +1,6 @@
 {
   "name": "@suggesto/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Core library for Suggesto feedback widget integration",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
