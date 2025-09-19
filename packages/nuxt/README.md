@@ -59,22 +59,53 @@ Access the widget programmatically using the provided composable:
 </template>
 
 <script setup>
-// Access the suggesto composable through Nuxt app
-const { $suggesto, $suggestoConfig } = useNuxtApp();
-const { isLoading, error, openModal, closeModal, on } = $suggesto($suggestoConfig);
+import { ref, onMounted, watch } from 'vue';
+
+// Reactive state
+const isLoading = ref(true);
+const error = ref(null);
+let openModal = ref(() => {});
 
 const openFeedback = () => {
-  openModal();
+  openModal.value();
 };
 
-// Listen for events
-on('ready', (data) => {
-  console.log('Widget ready:', data);
-});
+// Client-side only initialization
+onMounted(() => {
+  // Access the suggesto composable through Nuxt app (client-side only)
+  const { $suggesto, $suggestoConfig } = useNuxtApp();
 
-on('feedbackSubmitted', (data) => {
-  console.log('Feedback submitted:', data);
-  // Track analytics, show toast, etc.
+  if ($suggesto && $suggestoConfig) {
+    const suggestoInstance = $suggesto($suggestoConfig);
+
+    // Use the global reactive references directly
+    isLoading.value = suggestoInstance.isLoading.value;
+    error.value = suggestoInstance.error.value;
+    openModal.value = suggestoInstance.openModal;
+
+    // Watch for changes in the global state
+    watch(suggestoInstance.isLoading, (newValue) => {
+      isLoading.value = newValue;
+    }, { immediate: true });
+
+    watch(suggestoInstance.error, (newValue) => {
+      error.value = newValue;
+    }, { immediate: true });
+
+    // Listen for events
+    suggestoInstance.on('ready', (data) => {
+      console.log('Widget ready:', data);
+    });
+
+    suggestoInstance.on('feedbackSubmitted', (data) => {
+      console.log('Feedback submitted:', data);
+      // Track analytics, show toast, etc.
+    });
+
+    suggestoInstance.on('error', (errorData) => {
+      console.error('Widget error:', errorData);
+    });
+  }
 });
 </script>
 ```
@@ -313,6 +344,14 @@ on('feedbackSubmitted', (data) => {
 
 The widget is client-side only and won't affect your SSR performance. It loads after hydration is complete.
 
+### Singleton Pattern
+
+**Version 1.0.4+** implements a singleton pattern to prevent widget instance conflicts:
+- Auto-loading creates a single global widget instance
+- Manual composable usage reuses the same instance
+- Events and state are shared across the application
+- No duplicate widget loading or conflicts
+
 ### Code Splitting
 
 The widget script is loaded dynamically, keeping your main bundle size minimal.
@@ -349,6 +388,36 @@ declare module '#app' {
 ### Widget not appearing
 
 The widget loads client-side only. Check browser console for errors and ensure JavaScript is enabled.
+
+### Widget button stuck on "Loading..."
+
+**Fixed in v1.0.4**: The singleton pattern ensures proper state management.
+
+If you're still having issues:
+1. Ensure you're using v1.0.4 or later
+2. Check that you're using the updated programmatic control pattern shown above
+3. Events should now register correctly in the console
+
+### "$suggesto is not a function" error
+
+This occurs when trying to access the composable during SSR. Always wrap composable usage in `onMounted()`:
+
+```vue
+<script setup>
+onMounted(() => {
+  const { $suggesto } = useNuxtApp();
+  // Use composable here
+});
+</script>
+```
+
+### Auto-loading conflicts with manual control
+
+**Fixed in v1.0.4**: The singleton pattern prevents conflicts between auto-loading and manual usage.
+
+### Events not firing
+
+Events are automatically handled by the singleton instance. All events will be properly fired and can be listened to via the composable.
 
 ### TypeScript errors
 

@@ -11,9 +11,9 @@ Official NPM packages for integrating the Suggesto feedback widget into modern w
 | Package                               | Version                                              | Description                                    |
 | ------------------------------------- | ---------------------------------------------------- | ---------------------------------------------- |
 | [`@suggesto/core`](./packages/core)   | ![npm](https://img.shields.io/npm/v/@suggesto/core)  | Core library for JavaScript widget integration |
-| [`@suggesto/react`](./packages/react) | ![npm](https://img.shields.io/npm/v/@suggesto/react) | React hooks and components                     |
-| [`@suggesto/vue`](./packages/vue)     | ![npm](https://img.shields.io/npm/v/@suggesto/vue)   | Vue 3 composables and components               |
-| [`@suggesto/nuxt`](./packages/nuxt)   | ![npm](https://img.shields.io/npm/v/@suggesto/nuxt)  | Nuxt 3 module for zero-config setup            |
+| [`@suggesto/react`](./packages/react) | ![npm](https://img.shields.io/npm/v/@suggesto/react) | React hooks and components (v1.0.1+)          |
+| [`@suggesto/vue`](./packages/vue)     | ![npm](https://img.shields.io/npm/v/@suggesto/vue)   | Vue 3 composables and components (v1.0.1+)    |
+| [`@suggesto/nuxt`](./packages/nuxt)   | ![npm](https://img.shields.io/npm/v/@suggesto/nuxt)  | Nuxt 3 module for zero-config setup (v1.0.4+) |
 
 ## 🚀 Quick Start
 
@@ -114,6 +114,14 @@ Working examples for all supported frameworks:
 - **[Vue Example](./examples/vue-example/)** - Vue 3 + Vite + TypeScript
 - **[Nuxt Example](./examples/nuxt-example/)** - Nuxt 3 + TypeScript
 
+## 🧪 Test Projects
+
+Real-world test projects validating all packages:
+
+- **[Next.js Test](./tests/test-suggesto-nextjs/)** - Next.js with Client Component wrapper
+- **[Vue Test](./tests/test-suggesto-vue/)** - Vue 3 with event queue system
+- **[Nuxt Test](./tests/test-suggesto-nuxt/)** - Nuxt 3 with singleton pattern
+
 ## ⚡ Features
 
 ### Core Features
@@ -127,17 +135,21 @@ Working examples for all supported frameworks:
 
 - **useSuggesto Hook** - Programmatic control with React state management
 - **SuggestoWidget Component** - Declarative component with prop-based configuration
+- **Event Queue System** - Events properly queued and processed (v1.0.1+)
+- **Next.js App Router** - Full support with Client Component patterns
 - **Automatic Cleanup** - Proper widget lifecycle management
 
 ### Vue Features
 
 - **useSuggesto Composable** - Vue 3 composition API integration
 - **Reactive State** - Loading and error states as reactive refs
+- **Event Queue System** - Events properly queued and processed (v1.0.1+)
 - **Component & Composable** - Both declarative and programmatic approaches
 
 ### Nuxt Features
 
 - **Zero Configuration** - Auto-import and setup
+- **Singleton Pattern** - Prevents widget conflicts and duplicate loading (v1.0.4+)
 - **Server-Side Safe** - Client-side only loading with SSR compatibility
 - **Runtime Configuration** - Environment-based configuration
 
@@ -196,6 +208,32 @@ npm run dev
 - **Domain Restrictions** - Server-side validation
 - **XSS Prevention** - All inputs sanitized
 - **HTTPS Only** - Enforced for production
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Events not firing (React/Vue)**
+- Fixed in v1.0.1+ with event queue system
+- Ensure you're using the latest versions
+
+**Next.js App Router issues**
+- Use Client Component wrapper with `'use client'` directive
+- See [React documentation](./packages/react/README.md) for patterns
+
+**Nuxt widget conflicts**
+- Fixed in v1.0.4+ with singleton pattern
+- Auto-loading and manual control now work together seamlessly
+
+**SSR Hydration issues**
+- All packages are designed to be SSR-safe
+- Widgets load client-side only after hydration
+
+### Getting Help
+
+- 📖 [Complete Documentation](./docs/SUGGESTO-WIDGET-NPM.md)
+- 🧪 [Testing Guide](./docs/REAL-TESTS.md)
+- 🐛 [Issue Tracker](https://github.com/nicsoftware/suggesto-widget/issues)
 
 ## 🚀 Publishing
 

@@ -270,10 +270,27 @@ const handleFeedback = (data: SuggestoEvents['feedbackSubmitted']) => {
 
 - **Lazy Loading**: Widget script loads only when component is mounted
 - **Automatic Cleanup**: Removes widget on unmount to prevent memory leaks
+- **Event Queue System**: Events are properly queued and processed after widget loads (v1.0.1+)
 - **Reactive State**: Loading and error states are reactive Vue refs
 - **Minimal Bundle Size**: Core functionality is loaded from CDN
 
 ## Troubleshooting
+
+### Events not firing
+
+**Fixed in v1.0.1**: Events are now properly queued and will fire correctly after widget loads.
+
+If you're still having issues:
+1. Ensure you're using v1.0.1 or later
+2. Check that event handlers are registered in `onMounted()` or component setup
+3. Verify console for event logs (ready, feedbackSubmitted, error)
+
+### Widget not loading
+
+1. Verify your `boardId` is correct
+2. Check browser console for errors
+3. Ensure your domain is whitelisted in Suggesto dashboard
+4. Check network tab for failed requests to `https://suggesto.io/widget/...`
 
 ### Widget not loading in SSR
 
@@ -282,6 +299,20 @@ If you're using server-side rendering, the widget will only load on the client s
 ### Hydration mismatches
 
 The widget renders as a comment node (`<!---->`), so it won't cause hydration issues in SSR applications.
+
+### Nuxt Integration
+
+For Nuxt projects, we recommend using the dedicated `@suggesto/nuxt` module instead of this package:
+
+```bash
+npm install @suggesto/nuxt
+```
+
+The Nuxt module provides:
+- Zero-configuration setup
+- Automatic SSR compatibility
+- Built-in singleton pattern to prevent conflicts
+- Runtime configuration support
 
 ### TypeScript errors with events
 

@@ -1,6 +1,6 @@
 {
   "name": "@suggesto/vue",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vue 3 composables and components for Suggesto feedback widget",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

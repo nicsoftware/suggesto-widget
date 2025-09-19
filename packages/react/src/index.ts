@@ -9,6 +9,13 @@ export function useSuggesto(config: SuggestoConfig) {
   const widgetRef = useRef<SuggestoWidgetCore | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isWidgetLoaded, setIsWidgetLoaded] = useState(false);
+
+  // Queue for events registered before widget is loaded
+  const eventQueueRef = useRef<Array<{
+    event: keyof SuggestoEvents;
+    callback: (data: any) => void;
+  }>>([]);
 
   useEffect(() => {
     const widget = new SuggestoWidgetCore(config);
@@ -16,7 +23,16 @@ export function useSuggesto(config: SuggestoConfig) {
 
     widget
       .load()
-      .then(() => setIsLoading(false))
+      .then(() => {
+        setIsLoading(false);
+        setIsWidgetLoaded(true);
+
+        // Process queued events
+        eventQueueRef.current.forEach(({ event, callback }) => {
+          widget.on(event, callback);
+        });
+        eventQueueRef.current = []; // Clear the queue
+      })
       .catch((err) => {
         setError(err.message);
         setIsLoading(false);
@@ -25,6 +41,7 @@ export function useSuggesto(config: SuggestoConfig) {
     return () => {
       widget.destroy();
       widgetRef.current = null;
+      eventQueueRef.current = [];
     };
   }, [config.boardId, config.baseUrl]);
 
@@ -32,7 +49,13 @@ export function useSuggesto(config: SuggestoConfig) {
     event: K,
     callback: (data: SuggestoEvents[K]) => void
   ) => {
-    widgetRef.current?.on(event, callback);
+    if (isWidgetLoaded && widgetRef.current) {
+      // Widget is loaded, register immediately
+      widgetRef.current.on(event, callback);
+    } else {
+      // Widget not loaded yet, add to queue
+      eventQueueRef.current.push({ event, callback });
+    }
   };
 
   const openModal = () => widgetRef.current?.openModal();

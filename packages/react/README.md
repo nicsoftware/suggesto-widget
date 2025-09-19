@@ -58,6 +58,10 @@ function App() {
     on('feedbackSubmitted', (data) => {
       console.log('Feedback submitted:', data);
     });
+
+    on('error', (errorData) => {
+      console.error('Widget error:', errorData);
+    });
   }, [on]);
 
   if (error) {
@@ -69,7 +73,7 @@ function App() {
       <h1>My App</h1>
       {isLoading && <div>Loading widget...</div>}
       <button onClick={openModal} disabled={isLoading}>
-        Give Feedback
+        {isLoading ? 'Loading...' : 'Give Feedback'}
       </button>
     </div>
   );
@@ -194,20 +198,74 @@ Both the component and hook support the same events from [@suggesto/core](../cor
 
 ## Next.js Integration
 
-Works seamlessly with Next.js App Router and Pages Router:
+### App Router (Recommended)
+
+For Next.js 13+ with App Router, create a Client Component wrapper:
 
 ```tsx
-// app/layout.tsx or pages/_app.tsx
+// src/components/SuggestoProvider.tsx
+'use client';
+
 import { SuggestoWidget } from '@suggesto/react';
 
-export default function RootLayout({ children }) {
+export default function SuggestoProvider() {
+  const handleReady = (data: unknown) => {
+    console.log('Widget ready:', data);
+  };
+
+  const handleFeedbackSubmitted = (data: unknown) => {
+    console.log('Feedback submitted:', data);
+  };
+
+  const handleError = (error: unknown) => {
+    console.error('Widget error:', error);
+  };
+
   return (
-    <html>
+    <SuggestoWidget
+      boardId="your-board-id"
+      onReady={handleReady}
+      onFeedbackSubmitted={handleFeedbackSubmitted}
+      onError={handleError}
+    />
+  );
+}
+```
+
+Then use it in your layout:
+
+```tsx
+// src/app/layout.tsx
+import SuggestoProvider from '@/components/SuggestoProvider';
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
       <body>
         {children}
-        <SuggestoWidget boardId="your-board-id" />
+        <SuggestoProvider />
       </body>
     </html>
+  );
+}
+```
+
+### Pages Router
+
+```tsx
+// pages/_app.tsx
+import { SuggestoWidget } from '@suggesto/react';
+
+export default function App({ Component, pageProps }) {
+  return (
+    <>
+      <Component {...pageProps} />
+      <SuggestoWidget boardId="your-board-id" />
+    </>
   );
 }
 ```
@@ -229,6 +287,7 @@ const handleReady = (data: SuggestoEvents['ready']) => {
 
 - **Lazy Loading**: Widget script loads only when component mounts
 - **Automatic Cleanup**: Removes widget on unmount to prevent memory leaks
+- **Event Queue System**: Events are properly queued and processed after widget loads (v1.0.1+)
 - **Minimal Bundle Size**: Core functionality is loaded from CDN
 - **React 18 Ready**: Supports Concurrent Features and Strict Mode
 
@@ -239,6 +298,28 @@ const handleReady = (data: SuggestoEvents['ready']) => {
 1. Verify your `boardId` is correct
 2. Check browser console for errors
 3. Ensure your domain is whitelisted in Suggesto dashboard
+4. Check network tab for failed requests to `https://suggesto.io/widget/...`
+
+### Events not firing
+
+**Fixed in v1.0.1**: Events are now properly queued and will fire correctly after widget loads.
+
+If you're still having issues:
+1. Ensure you're using v1.0.1 or later
+2. Check that event handlers are registered before widget loads
+3. Verify console for event logs (ready, feedbackSubmitted, error)
+
+### Next.js App Router issues
+
+**Server Component Error**: "Event handlers cannot be passed to Client Component props"
+- **Solution**: Use the Client Component wrapper pattern shown above
+- Create a separate `'use client'` component for the Suggesto widget
+
+### SSR/Hydration issues
+
+1. Widget loads client-side only, which is expected
+2. Use `'use client'` directive for Next.js App Router
+3. No hydration mismatches should occur with proper client component setup
 
 ### TypeScript errors
 

@@ -18,10 +18,7 @@ const widget = new SuggestoWidget({
   baseUrl: 'https://suggesto.io' // Optional: Custom server URL
 });
 
-// Load the widget
-await widget.load();
-
-// Listen for events
+// Listen for events (register before loading)
 widget.on('ready', (data) => {
   console.log('Widget ready:', data);
 });
@@ -33,6 +30,9 @@ widget.on('feedbackSubmitted', (data) => {
 widget.on('error', (data) => {
   console.error('Widget error:', data);
 });
+
+// Load the widget
+await widget.load();
 ```
 
 ## API Reference
@@ -150,13 +150,83 @@ Fired when an error occurs.
 }
 ```
 
+## Best Practices
+
+### Event Registration
+
+Always register event listeners before calling `load()`:
+
+```typescript
+// ✅ Good: Register events first
+widget.on('ready', handleReady);
+await widget.load();
+
+// ❌ Bad: Events may be missed
+await widget.load();
+widget.on('ready', handleReady);
+```
+
+### Error Handling
+
+Always include error handling:
+
+```typescript
+widget.on('error', (error) => {
+  console.error('Widget error:', error);
+  // Handle error gracefully
+});
+
+try {
+  await widget.load();
+} catch (err) {
+  console.error('Failed to load widget:', err);
+}
+```
+
+### Cleanup
+
+Always call `destroy()` when the widget is no longer needed:
+
+```typescript
+// In framework cleanup (useEffect return, onUnmounted, etc.)
+widget.destroy();
+```
+
 ## Framework Integration
 
 This core library is used by framework-specific packages:
 
-- [@suggesto/react](../react) - React hooks and components
-- [@suggesto/vue](../vue) - Vue 3 composables and components  
-- [@suggesto/nuxt](../nuxt) - Nuxt 3 module
+- [@suggesto/react](../react) - React hooks and components with event queue system
+- [@suggesto/vue](../vue) - Vue 3 composables and components with event queue system
+- [@suggesto/nuxt](../nuxt) - Nuxt 3 module with singleton pattern
+
+**Note**: Framework packages handle event timing automatically. For direct core usage, follow the best practices above.
+
+## Troubleshooting
+
+### Widget not loading
+
+1. Verify your `boardId` is correct
+2. Check browser console for network errors
+3. Ensure your domain is whitelisted in Suggesto dashboard
+4. Check for CORS issues or content security policy restrictions
+
+### Events not firing
+
+1. Register event listeners before calling `load()`
+2. Check browser console for JavaScript errors
+3. Verify the widget script loads successfully (Network tab)
+
+### Memory leaks
+
+Always call `destroy()` when cleaning up:
+
+```typescript
+// Example cleanup in vanilla JS
+window.addEventListener('beforeunload', () => {
+  widget.destroy();
+});
+```
 
 ## TypeScript Support
 
